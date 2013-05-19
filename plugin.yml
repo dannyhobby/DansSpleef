@@ -1,0 +1,7 @@
+name: DansSpleef
+version: 1.0.0
+main: com.github.danielhobby.dansspleef.Main
+
+commands:
+  test:
+    description: Test Command

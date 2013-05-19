@@ -26,38 +26,41 @@ public class Main extends JavaPlugin {
 			String[] args) {
 		Player player = (Player) sender;
 
-		if (cmd.getLabel().equals("test")) {
+		if (cmd.getLabel().equalsIgnoreCase("spleef") && args[0].equalsIgnoreCase("reset")) {
+			
 			if ((this.pos1 == null) || (this.pos2 == null)) {
 				player.sendMessage("Please supply pos 1 and pos 2.");
 				return true;
 			}
+			
 			World world = Bukkit.getWorld("world");
 			HashSet<Location> locations = new HashSet<Location>();
 
 			Location loc1 = this.pos1;
 			Location loc2 = this.pos2;
 
-			Boolean xpositive = Boolean.valueOf(true);
-			Boolean zpositive = Boolean.valueOf(true);
-			Boolean ypositive = Boolean.valueOf(true);
+			Boolean xpositive = true;
+			Boolean zpositive = true;
+			Boolean ypositive = true;
 
 			if (loc1.getX() > loc2.getX())
-				xpositive = Boolean.valueOf(false);
+				xpositive = false;
 			else {
-				xpositive = Boolean.valueOf(true);
+				xpositive = true;
 			}
 
 			if (loc1.getZ() > loc2.getZ())
-				zpositive = Boolean.valueOf(false);
+				zpositive = false;
 			else {
-				zpositive = Boolean.valueOf(true);
+				zpositive = true;
 			}
 
 			if (loc1.getY() > loc2.getY()) {
-				ypositive = Boolean.valueOf(false);
+				ypositive = false;
 			} else {
-				ypositive = Boolean.valueOf(true);
+				ypositive = true;
 			}
+			
 			if ((xpositive.booleanValue()) && (zpositive.booleanValue())
 					&& (ypositive.booleanValue())) {
 				for (int x = loc1.getBlockX(); x <= loc2.getBlockX(); x++) {
@@ -145,16 +148,11 @@ public class Main extends JavaPlugin {
 
 			return true;
 		}
-		if ((cmd.getLabel().equals("spleef")) && (args[0].equals("pos1"))) {
-			this.pos1 = new Location(player.getWorld(), player.getLocation()
-					.getX(), player.getLocation().getY(), player.getLocation()
-					.getZ());
+		if ((cmd.getLabel().equalsIgnoreCase("spleef")) && (args[0].equalsIgnoreCase("pos1"))) {
+			pos1 = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
 			player.sendMessage("Added p1.");
-		} else if ((cmd.getLabel().equals("spleef"))
-				&& (args[0].equals("pos2"))) {
-			this.pos2 = new Location(player.getWorld(), player.getLocation()
-					.getX(), player.getLocation().getY(), player.getLocation()
-					.getZ());
+		} else if ((cmd.getLabel().equalsIgnoreCase("spleef")) && (args[0].equalsIgnoreCase("pos2"))) {
+			pos2 = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
 			player.sendMessage("Added p2.");
 		}
 
